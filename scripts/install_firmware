@@ -1,4 +1,5 @@
 #!/bin/bash
+YESALL=${3:-false}
 
 default_path=$(dirname $(realpath $0))"/../BSL/"
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+YESALL=${3:-false}
 
 kernel_dir=/lib/modules/$(uname -r)/build/
 
@@ -17,8 +18,12 @@ fi
 case "$1" in
   "build")
   if [ -e "${buildfolder}/uio_netx.c" ]; then
-    echo "To enable DMA support type 'y' else 'n':"
-    read dma_enable
+    if "${YESALL}"; then
+      dma_enable="y"
+    else
+      echo "To enable DMA support type 'y' else 'n':"
+      read dma_enable
+    fi
     if [ "$dma_enable" != "y" ]; then
       echo "Compile kernel module uio_netx.ko (DMA disabled)"
       cd "${buildfolder}" && make clean; make KDIR=$kernel_dir DMA_DISABLE=1

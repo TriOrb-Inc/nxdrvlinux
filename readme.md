@@ -11,6 +11,9 @@ This repository provides the following components:
 | [cifX examples](examples/)                               | [MIT](LICENSE.md)                        | cifX driver example applications (API, TCP server).
 |  - [marshaller toolkit](examples/tcpserver/Marshaller/)  | in clarification                         | OS independant implementation of the netXtransport protocol device(/server) side. It is referenced by the TCP server ([more information](https://hilscher.atlassian.net/l/cp/e4W3zr1Y)).
 
+# Official documents
+- Overview：https://hilscher.atlassian.net/wiki/spaces/CIFXDRV/overview
+- Linux：https://hilscher.atlassian.net/wiki/spaces/CIFXDRV/pages/80905444/Device+Driver+Linux+NXDRV-LINUX
 
 # Driver architecture
 
@@ -72,6 +75,12 @@ Enter the directory containing the script 'build_and_install_driver' execute it 
 In case a more advanced setup is required or any installation trouble run the setup step by step.
 <pre>
 
+</pre>
+# Docker build
+```shell
+docker build --tag triorb/ros2/cifx:humble  .
+```
+<pre>
 
 </pre>
 # Manual driver installation
@@ -199,5 +208,5 @@ cmake ../examples/ -DDEBUG=ON
 3. Build the examples. And run a demo application. Note that you may need root rights. This depends on your system setup. For more information see "System and hardware setup".
 ```
 make
-./cifxapi
+./cifx_api
 ```

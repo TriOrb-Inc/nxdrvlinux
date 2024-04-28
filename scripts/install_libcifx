@@ -1,4 +1,6 @@
 #!/bin/bash -e
+YESALL=${2:-false}
+ENABLESPI=${3:-false}
 
 drv_dir=$(dirname $(realpath $0))"/../libcifx/"
 buildfolder="${drv_dir}"
@@ -9,50 +11,68 @@ if (( "$#" >= "1" )); then
   fi
 fi
 
-  # build and install user space library
+# build and install user space library
+if "${YESALL}"; then
+  debug_enable="y"
+else  
   echo "To enable build of debug symbols type 'y' else 'n':"
   read debug_enable
-  if [ "$debug_enable" == "y" ]; then
-    options="$options -DDEBUG=ON"
-  else
-    options="$options -DDEBUG=OFF"
-  fi
+fi
+if [ "$debug_enable" == "y" ]; then
+  options="$options -DDEBUG=ON"
+else
+  options="$options -DDEBUG=OFF"
+fi
+if "${YESALL}"; then
+  debug_enable="y"
+else  
   echo "To enable dma support type 'y' else 'n':"
   echo "NOTE: This feature requires to build uio_netx also with dma support!"
   read debug_enable
-  if [ "$debug_enable" == "y" ]; then
-    options="$options -DDMA=ON"
-  else
-    options="$options -DDMA=OFF"
-  fi
+fi
+if [ "$debug_enable" == "y" ]; then
+  options="$options -DDMA=ON"
+else
+  options="$options -DDMA=OFF"
+fi
+if "${YESALL}"; then
+  ethernet_enable="y"
+else  
   echo "To enable ethernet support type 'y' else 'n':"
   echo "NOTE: This feature requires dedicated hardware and firmware!"
   read ethernet_enable
-  if [ "$ethernet_enable" == "y" ]; then
-    options="$options -DVIRTETH=ON"
-  else
-    options="$options -DVIRTETH=OFF"
-  fi
+fi
+if [ "$ethernet_enable" == "y" ]; then
+  options="$options -DVIRTETH=ON"
+else
+  options="$options -DVIRTETH=OFF"
+fi
+if "${ENABLESPI}"; then
+  spi_plugin_enable="y"
+elif "${YESALL}"; then
+  spi_plugin_enable="n"
+else
   echo "To enable SPI plugin support type 'y' else 'n':"
   read spi_plugin_enable
-  if [ "$spi_plugin_enable" == "y" ]; then
-    options="$options -DSPM_PLUGIN=ON"
+fi
+if [ "$spi_plugin_enable" == "y" ]; then
+  options="$options -DSPM_PLUGIN=ON"
+else
+  options="$options -DSPM_PLUGIN=OFF"
+fi
+tmp_dir=$pwd
+cd "${buildfolder}"
+if ! cmake "${drv_dir}" ${options}; then
+  echo "Error preparing environment!"
+elif ! make clean; then
+  echo "Error clean up library libcifx!"
+elif ! make ; then
+  echo "Error building user space library libcifx!"
+else
+  if ! sudo make install; then
+    echo "Error installing userspace driver!"
   else
-    options="$options -DSPM_PLUGIN=OFF"
+    echo "cifX driver successfully installed!"
   fi
-  tmp_dir=$pwd
-  cd "${buildfolder}"
-  if ! cmake "${drv_dir}" ${options}; then
-    echo "Error preparing environment!"
-  elif ! make clean; then
-    echo "Error clean up library libcifx!"
-  elif ! make ; then
-    echo "Error building user space library libcifx!"
-  else
-    if ! sudo make install; then
-      echo "Error installing userspace driver!"
-    else
-      echo "cifX driver successfully installed!"
-    fi
-  fi
-  cd "${tmp_dir}"
+fi
+cd "${tmp_dir}"
