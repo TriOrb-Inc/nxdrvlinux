@@ -61,6 +61,19 @@ sudo apt-get install libnl-3-dev libnl-cli-3-dev
 ```
 <pre>
 
+</pre>
+# Docker build
+```bash
+docker build --tag triorb/ros2/cifx:foxy  .
+```
+<pre>
+
+</pre>
+# Docker run, bild, install
+```bash
+sh run_container.sh
+```
+<pre>
 
 </pre>
 # Simple driver installation in one step
@@ -73,13 +86,6 @@ Enter the directory containing the script 'build_and_install_driver' execute it 
 ```
 
 In case a more advanced setup is required or any installation trouble run the setup step by step.
-<pre>
-
-</pre>
-# Docker build
-```shell
-docker build --tag triorb/ros2/cifx:humble  .
-```
 <pre>
 
 </pre>
