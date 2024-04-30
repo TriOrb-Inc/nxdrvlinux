@@ -6,8 +6,6 @@ RUN apt update && apt upgrade -y
 # Install debian packages
 RUN apt install -y \
     cmake\
-    linux-headers-$(uname -r)\
-    linux-modules-$(uname -r)\
     kmod \
     libpciaccess-dev\
     libnl-3-dev\

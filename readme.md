@@ -64,7 +64,7 @@ sudo apt-get install libnl-3-dev libnl-cli-3-dev
 </pre>
 # Docker build
 ```bash
-docker build --tag triorb/ros2/cifx:foxy  .
+docker build --tag triorb/cifx:latest  .
 ```
 <pre>
 
