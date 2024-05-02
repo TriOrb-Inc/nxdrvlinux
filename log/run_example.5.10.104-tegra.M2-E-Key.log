@@ -1,0 +1,41 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ws/demo_build
+Consolidate compiler generated dependencies of target cifx_tcpserver
+[ 77%] Built target cifx_tcpserver
+Consolidate compiler generated dependencies of target cifx_api
+[100%] Built target cifx_api
+<1> 02.05.2024 06:20:46.967.493: Device Type autodetection: RAM Based Device found!
+<1> 02.05.2024 06:20:46.967.558: New RAM based device found, device will be reset!
+<1> 02.05.2024 06:20:47.570.123: Chiptype detected: 1
+<8> 02.05.2024 06:20:47.570.182: Error opening bootloader file '/opt/cifx/NXCIF50-RTE.bin'!
+<8> 02.05.2024 06:20:47.570.194: Bootloader could not be started! (lRet=0x800A000A)
+<255> 02.05.2024 06:20:47.570.207: Error: 0x800A000A, <File could not be opened>
+
+
+---------- Display Driver Version ----------
+Driver Version: LinuxCIFXDrv V3.0.0, based on cifX Toolkit 2.8.0.1 
+
+ State = 0x00000000
+----------------------------------------------------
+---------- Board/Channel enumeration demo ----------
+ State = 0x00000000
+----------------------------------------------------
+---------- System Device handling demo ----------
+Error opening SystemDevice!
+ State = 0x800A0002
+----------------------------------------------------
+---------- Communication Channel demo ----------
+Error opening Channel! State = 0x800A0002
+----------------------------------------------------
+
+--- Read / Write Block Information ---
+Error opening Channel!
+
+--- Event handling demo ---
+Error: 0x800A0002, <No board with the given name / index available>
+
+--- Set Bus / Host State Demo ---
+Error opening Channel!
+ State = 0x800A0002
+----------------------------------------------------
